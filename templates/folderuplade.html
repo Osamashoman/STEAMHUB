@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="upload-form" method="post" action="{% url 'upload' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <input type="text" name="map_name" >
+  <input type="file" name="file" multiple = "true" webkitdirectory="true" directory = "true" id="file-input">
+    <input type="text" name="path" id="filepath" hidden="true" >
+    <input type="submit" >
+
+</form>
+ <button onclick="addfilepath()">Upload</button>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+
+
+<script>
+
+    function addfilepath() {
+
+        var file = document.getElementById('file-input').files;
+
+        var paths = [];
+        console.log(file.length);
+        for (var i = 0; i < file.length; i++) {
+            var files = file[i];
+            paths.push(files.webkitRelativePath);
+
+        }
+
+        var x=document.getElementById("filepath");
+        x.value = paths;
+
+
+    }
+
+
+</script>
+</body>
+</html>
