@@ -8,10 +8,10 @@ from rest_framework.views import APIView
 from django.core.files.storage import FileSystemStorage
 
 from SteamHub import settings
-from gamecore.models import Map, Player
+from gamecore.models import *
 from gamecore.serializers import *
 from rest_framework.decorators import api_view, renderer_classes
-
+from rest_framework import status
 
 
 
@@ -97,9 +97,7 @@ class upload(View):
 def index(request):
     api_urls = {
         'List': '/map-list/',
-        'Detail View': '/map-detail/<str:pk>/',
-        'Create': '/map-create/',
-        'Update': '/map-update/<str:pk>/',
+         
         'Delete': '/map-delete/<str:pk>/',
     }
 
@@ -172,29 +170,47 @@ def test1(request):
 
 
 def test(request):
-
+    print(request.data)
 
 
     return Response({
-        "stat":"okay"
-
+        "stats": "okay"
     })
-
 
 
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def join_class(request):
+def join_class(request):    
     user=request.user
+    print(user)
     class_room_code=request.data.get('class_room_code')
-    class_obj=ClassRoom.objects.get(class_room_code=class_room_code)
+    print(class_room_code)
+
+    print(request.data)
+    try:
+        
+        class_obj=ClassRoom.objects.filter(class_room_code=class_room_code)
+        print(class_obj)
+        player=Player.objects.get(user=user)
+        player.class_room.add(class_obj[0])
+        print(player)
+        return Response("Joined")
+    except:
+        print("Class not found")
+        return Response("Class not found",status=status.HTTP_400_BAD_REQUEST)
+ 
+
+ 
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_my_class(request):
+    user=request.user
     player=Player.objects.get(user=user)
-    player.class_room=class_obj
-    player.save()
-    return Response("Joined")
-
-
+    class_room=player.class_room.all()
+    serializer=ClassRoomSerializer(class_room,many=True)
+    return Response(serializer.data)
 
 
 

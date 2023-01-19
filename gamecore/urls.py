@@ -16,9 +16,10 @@ urlpatterns = [
     path('map_list/', views.map_list),
     path('map_detail/<int:pk>', views.map_detail),
     path('map_update/<int:pk>/', views.map_update),
-
+    
     path('upload/', upload.as_view(), name='upload'),
     path('join_class/', views.join_class,name='join_class'),
+    path('get_my_class/', views.get_my_class,name='get_my_class'),
 
     path('test/', views.test),
 

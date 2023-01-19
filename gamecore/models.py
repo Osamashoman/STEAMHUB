@@ -23,10 +23,10 @@ class Map(models.Model):
     name = models.CharField(max_length=50)
     map_url=models.CharField(max_length=1000)
     description = models.CharField(max_length=100, blank=True)
-    image = models.ImageField(upload_to='maps', null=True, blank=True)
+    image = models.CharField(max_length=10000, null=True, blank=True)
     file = models.CharField(max_length=100, blank=True)
     class_room = models.ManyToManyField("ClassRoom" , blank=True)
-
+    
 
 
 

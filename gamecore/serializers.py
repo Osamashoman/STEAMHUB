@@ -41,4 +41,8 @@ class GameSerializer(serializers.ModelSerializer):
 
 
 
+class ClassRoomSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClassRoom
+        fields = '__all__'
 

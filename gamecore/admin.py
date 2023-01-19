@@ -13,4 +13,6 @@ admin.site.register(GameLeaderboard)
 admin.site.register(MapLeaderboard)
 admin.site.register(Game)
 admin.site.register(ClassRoom)
+admin.site.register(ClassRoomCategory)
+
 
