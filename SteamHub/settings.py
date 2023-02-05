@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt.token_blacklist',
+    
+ 
 
 ]
 
@@ -208,6 +210,15 @@ GAME_BUCKET = "gmaeupload"
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "http://localhost:3001",
+    "https://s3.amazonaws.com",
+    "http://3.87.56.10:8000",
+    "http://52.3.244.96",
+    "http://3.215.185.162",
+    "http://www.steamhub.cloud",
+    "https://auth.steamhub.cloud"
+
+
+
     ]
 
 CORS_ALLOW_CREDENTIALS = True
